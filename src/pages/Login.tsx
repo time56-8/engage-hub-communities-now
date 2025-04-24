@@ -51,7 +51,7 @@ const Login = () => {
       
       <main className="flex-1 bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md">
-          <Card>
+          <Card className="shadow-lg">
             <CardHeader className="space-y-1">
               <CardTitle className="text-2xl font-bold text-center">Welcome back</CardTitle>
               <CardDescription className="text-center">
@@ -75,13 +75,14 @@ const Login = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    className="border-gray-300"
                   />
                 </div>
                 
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <label htmlFor="password" className="text-sm font-medium">Password</label>
-                    <Link to="/forgot-password" className="text-sm text-community-primary hover:underline">
+                    <Link to="/forgot-password" className="text-sm text-indigo-600 hover:underline">
                       Forgot password?
                     </Link>
                   </div>
@@ -92,12 +93,13 @@ const Login = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    className="border-gray-300"
                   />
                 </div>
                 
                 <Button 
                   type="submit" 
-                  className="w-full" 
+                  className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium" 
                   disabled={isLoading}
                 >
                   {isLoading ? 'Signing in...' : 'Sign in'}
@@ -107,7 +109,7 @@ const Login = () => {
             <CardFooter>
               <p className="text-sm text-center w-full text-gray-600">
                 Don't have an account?{' '}
-                <Link to="/signup" className="text-community-primary hover:underline">
+                <Link to="/signup" className="text-indigo-600 hover:underline font-medium">
                   Sign up
                 </Link>
               </p>

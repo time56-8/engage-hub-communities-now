@@ -5,9 +5,11 @@ import { Button } from '@/components/ui/button';
 import Header from '@/components/Header';
 import CommunityCard from '@/components/CommunityCard';
 import { useCommunity } from '@/contexts/CommunityContext';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Index = () => {
   const { communities } = useCommunity();
+  const { isAuthenticated } = useAuth();
   
   // Get featured communities (just the first 3)
   const featuredCommunities = communities.slice(0, 3);
@@ -18,7 +20,7 @@ const Index = () => {
       
       <main className="flex-1">
         {/* Hero section */}
-        <section className="bg-gradient-to-r from-community-primary to-community-secondary text-white py-16">
+        <section className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-16">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">
@@ -28,12 +30,15 @@ const Index = () => {
                 Join conversations, share knowledge, and connect with people who share your passions.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4 animate-slide-in">
-                <Button size="lg" asChild className="bg-white text-community-primary hover:bg-gray-100">
+                <Button size="lg" asChild className="bg-white text-indigo-600 hover:bg-gray-100 font-semibold">
                   <Link to="/communities">Explore Communities</Link>
                 </Button>
-                <Button size="lg" variant="outline" asChild className="text-white border-white hover:bg-white/10">
-                  <Link to="/signup">Create Account</Link>
-                </Button>
+                
+                {!isAuthenticated && (
+                  <Button size="lg" variant="outline" asChild className="text-white border-white hover:bg-white/10 font-semibold">
+                    <Link to="/signup">Create Account</Link>
+                  </Button>
+                )}
               </div>
             </div>
           </div>
@@ -44,7 +49,7 @@ const Index = () => {
           <div className="container mx-auto px-4">
             <div className="flex justify-between items-center mb-8">
               <h2 className="text-2xl font-semibold">Featured Communities</h2>
-              <Link to="/communities" className="text-community-primary hover:underline">
+              <Link to="/communities" className="text-indigo-600 hover:underline font-medium">
                 View All
               </Link>
             </div>
@@ -64,8 +69,8 @@ const Index = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
               <div className="text-center">
-                <div className="mb-4 p-4 bg-community-primary/10 inline-block rounded-full">
-                  <svg className="h-10 w-10 text-community-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <div className="mb-4 p-4 bg-indigo-100 inline-block rounded-full">
+                  <svg className="h-10 w-10 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M8 14s1.5 2 4 2 4-2 4-2" />
                     <path d="M9 9h.01" />
@@ -79,8 +84,8 @@ const Index = () => {
               </div>
               
               <div className="text-center">
-                <div className="mb-4 p-4 bg-community-secondary/10 inline-block rounded-full">
-                  <svg className="h-10 w-10 text-community-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <div className="mb-4 p-4 bg-purple-100 inline-block rounded-full">
+                  <svg className="h-10 w-10 text-purple-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M12 20h9M16.5 3.5v17M7.5 3.5v17M3 16.5h8.5M3 7.5h8.5M3 12h8.5" />
                   </svg>
                 </div>
@@ -91,8 +96,8 @@ const Index = () => {
               </div>
               
               <div className="text-center">
-                <div className="mb-4 p-4 bg-community-accent/10 inline-block rounded-full">
-                  <svg className="h-10 w-10 text-community-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <div className="mb-4 p-4 bg-fuchsia-100 inline-block rounded-full">
+                  <svg className="h-10 w-10 text-fuchsia-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
                   </svg>
                 </div>
@@ -105,18 +110,20 @@ const Index = () => {
           </div>
         </section>
         
-        {/* CTA section */}
-        <section className="py-16 bg-gray-900 text-white">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold mb-6">Ready to Join the Conversation?</h2>
-            <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-              Create an account today and start connecting with communities that share your interests.
-            </p>
-            <Button size="lg" asChild>
-              <Link to="/signup">Get Started Now</Link>
-            </Button>
-          </div>
-        </section>
+        {/* CTA section - only show if not authenticated */}
+        {!isAuthenticated && (
+          <section className="py-16 bg-gray-900 text-white">
+            <div className="container mx-auto px-4 text-center">
+              <h2 className="text-3xl font-bold mb-6">Ready to Join the Conversation?</h2>
+              <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+                Create an account today and start connecting with communities that share your interests.
+              </p>
+              <Button size="lg" asChild className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold">
+                <Link to="/signup">Get Started Now</Link>
+              </Button>
+            </div>
+          </section>
+        )}
       </main>
       
       {/* Footer */}

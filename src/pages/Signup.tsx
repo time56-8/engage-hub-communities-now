@@ -65,7 +65,7 @@ const Signup = () => {
       
       <main className="flex-1 bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md">
-          <Card>
+          <Card className="shadow-lg">
             <CardHeader className="space-y-1">
               <CardTitle className="text-2xl font-bold text-center">Create an account</CardTitle>
               <CardDescription className="text-center">
@@ -88,6 +88,7 @@ const Signup = () => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
+                    className="border-gray-300"
                   />
                 </div>
                 
@@ -100,6 +101,7 @@ const Signup = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    className="border-gray-300"
                   />
                 </div>
                 
@@ -112,6 +114,7 @@ const Signup = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    className="border-gray-300"
                   />
                 </div>
                 
@@ -124,12 +127,13 @@ const Signup = () => {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
+                    className="border-gray-300"
                   />
                 </div>
                 
                 <Button 
                   type="submit" 
-                  className="w-full" 
+                  className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium" 
                   disabled={isLoading}
                 >
                   {isLoading ? 'Creating account...' : 'Sign up'}
@@ -139,7 +143,7 @@ const Signup = () => {
             <CardFooter>
               <p className="text-sm text-center w-full text-gray-600">
                 Already have an account?{' '}
-                <Link to="/login" className="text-community-primary hover:underline">
+                <Link to="/login" className="text-indigo-600 hover:underline font-medium">
                   Sign in
                 </Link>
               </p>
