@@ -10,10 +10,12 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import CommunityCard from '@/components/CommunityCard';
 import PostCard from '@/components/PostCard';
+import { Pencil } from 'lucide-react';
+import { toast } from 'sonner';
 
 const Profile = () => {
   const navigate = useNavigate();
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const { userCommunities, posts } = useCommunity();
   
   // Redirect if not authenticated
@@ -36,6 +38,11 @@ const Profile = () => {
     month: 'long',
     day: 'numeric'
   }).format(user.joinDate);
+
+  const handleEditProfile = () => {
+    navigate('/settings');
+    toast.info("Edit your profile in settings");
+  };
   
   return (
     <div className="min-h-screen flex flex-col">
@@ -56,13 +63,25 @@ const Profile = () => {
                   <div className="flex-1 text-center md:text-left">
                     <CardTitle className="text-2xl mb-1">{user.username}</CardTitle>
                     <p className="text-gray-500 mb-4">{user.email}</p>
+                    {user.bio && <p className="text-gray-700 mb-4">{user.bio}</p>}
                     
                     <div className="flex flex-col sm:flex-row gap-3">
-                      <Button variant="outline" size="sm">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        className="flex items-center gap-2"
+                        onClick={handleEditProfile}
+                      >
+                        <Pencil className="w-4 h-4" />
                         Edit Profile
                       </Button>
-                      <Button variant="outline" size="sm" className="text-red-500" onClick={logout}>
-                        Sign Out
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="text-red-500" 
+                        onClick={() => navigate('/settings')}
+                      >
+                        Settings
                       </Button>
                     </div>
                   </div>

@@ -8,6 +8,7 @@ interface User {
   avatar?: string;
   joinDate: Date;
   interests: string[];
+  bio?: string;
 }
 
 interface AuthContextType {
@@ -16,6 +17,7 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<boolean>;
   signup: (username: string, email: string, password: string) => Promise<boolean>;
   logout: () => void;
+  updateUser: (userData: Partial<User>) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -109,6 +111,26 @@ export function AuthProvider({ children }: AuthProviderProps) {
     return true;
   };
 
+  const updateUser = (userData: Partial<User>) => {
+    if (!user) return;
+    
+    const updatedUser = { ...user, ...userData };
+    setUser(updatedUser);
+    
+    // Update in localStorage
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+    
+    // Update in users array
+    const users = ensureUserDatabase();
+    const userIndex = users.findIndex((u: any) => u.id === user.id);
+    
+    if (userIndex !== -1) {
+      const { password } = users[userIndex]; // Keep the password
+      users[userIndex] = { ...updatedUser, password };
+      localStorage.setItem("users", JSON.stringify(users));
+    }
+  };
+
   const logout = () => {
     setUser(null);
     setIsAuthenticated(false);
@@ -116,7 +138,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, login, signup, logout }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, login, signup, logout, updateUser }}>
       {children}
     </AuthContext.Provider>
   );
