@@ -23,7 +23,7 @@
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 291 84% 61%;
+    --accent: 291 70% 61%;
     --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
@@ -64,7 +64,7 @@
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 291 84% 61%;
+    --accent: 291 70% 61%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -97,7 +97,7 @@
 @layer components {
   /* Community cards hover effect */
   .community-card {
-    @apply transition-all duration-300 ease-in-out;
+    @apply transition-all duration-300 ease-in-out shadow-md;
   }
   
   .community-card:hover {
@@ -126,5 +126,15 @@
   /* Activity pulse */
   .activity-pulse {
     @apply inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse-light mr-2;
+  }
+
+  /* Hero section buttons */
+  .hero-button {
+    @apply font-semibold text-base shadow-md;
+  }
+
+  /* Card style improvements */
+  .enhanced-card {
+    @apply shadow-md hover:shadow-lg transition-all duration-300;
   }
 }

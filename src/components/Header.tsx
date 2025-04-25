@@ -48,7 +48,7 @@ const Header = () => {
               <Input
                 type="text"
                 placeholder="Search communities, topics..."
-                className="pl-10 w-full"
+                className="pl-10 w-full border-2"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -68,7 +68,7 @@ const Header = () => {
             {isAuthenticated ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="outline" className="hidden md:flex items-center space-x-2">
+                  <Button variant="outline" className="hidden md:flex items-center space-x-2 border-2 shadow-sm">
                     <Avatar className="h-8 w-8">
                       <AvatarImage src={user?.avatar} alt={user?.username} />
                       <AvatarFallback>{user?.username?.substring(0, 2).toUpperCase()}</AvatarFallback>
@@ -98,10 +98,10 @@ const Header = () => {
               </DropdownMenu>
             ) : (
               <div className="hidden md:flex space-x-2">
-                <Button variant="outline" asChild className="border-indigo-600 text-indigo-600 hover:bg-indigo-50">
+                <Button variant="outline" asChild className="border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-50 font-medium shadow-sm">
                   <Link to="/login">Log in</Link>
                 </Button>
-                <Button asChild className="bg-indigo-600 text-white hover:bg-indigo-700">
+                <Button asChild variant="primary" className="shadow-sm font-medium">
                   <Link to="/signup">Sign up</Link>
                 </Button>
               </div>
@@ -130,7 +130,7 @@ const Header = () => {
               <Input
                 type="text"
                 placeholder="Search communities, topics..."
-                className="pl-10 w-full"
+                className="pl-10 w-full border-2"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -176,14 +176,14 @@ const Header = () => {
               <div className="space-y-2 pt-2">
                 <Button 
                   variant="outline" 
-                  className="w-full border-indigo-600 text-indigo-600 hover:bg-indigo-50"
+                  className="w-full border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-50 font-medium shadow-sm"
                   asChild
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <Link to="/login">Log in</Link>
                 </Button>
                 <Button 
-                  className="w-full bg-indigo-600 text-white hover:bg-indigo-700"
+                  className="w-full bg-indigo-600 text-white hover:bg-indigo-700 font-medium shadow-sm"
                   asChild
                   onClick={() => setIsMenuOpen(false)}
                 >

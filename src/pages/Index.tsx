@@ -30,12 +30,12 @@ const Index = () => {
                 Join conversations, share knowledge, and connect with people who share your passions.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4 animate-slide-in">
-                <Button size="lg" asChild className="bg-white text-indigo-600 hover:bg-gray-100 font-semibold">
+                <Button size="lg" variant="primary" asChild className="hero-button bg-white text-indigo-600 hover:bg-gray-100">
                   <Link to="/communities">Explore Communities</Link>
                 </Button>
                 
                 {!isAuthenticated && (
-                  <Button size="lg" variant="outline" asChild className="text-white border-white hover:bg-white/10 font-semibold">
+                  <Button size="lg" variant="outline" asChild className="hero-button text-white border-white hover:bg-white/20">
                     <Link to="/signup">Create Account</Link>
                   </Button>
                 )}
@@ -49,8 +49,11 @@ const Index = () => {
           <div className="container mx-auto px-4">
             <div className="flex justify-between items-center mb-8">
               <h2 className="text-2xl font-semibold">Featured Communities</h2>
-              <Link to="/communities" className="text-indigo-600 hover:underline font-medium">
-                View All
+              <Link to="/communities" className="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
+                View All 
+                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                </svg>
               </Link>
             </div>
             
@@ -68,7 +71,7 @@ const Index = () => {
             <h2 className="text-2xl font-semibold text-center mb-12">How EngageHub Works</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              <div className="text-center">
+              <div className="text-center p-6 rounded-lg enhanced-card bg-white">
                 <div className="mb-4 p-4 bg-indigo-100 inline-block rounded-full">
                   <svg className="h-10 w-10 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <circle cx="12" cy="12" r="10" />
@@ -83,7 +86,7 @@ const Index = () => {
                 </p>
               </div>
               
-              <div className="text-center">
+              <div className="text-center p-6 rounded-lg enhanced-card bg-white">
                 <div className="mb-4 p-4 bg-purple-100 inline-block rounded-full">
                   <svg className="h-10 w-10 text-purple-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M12 20h9M16.5 3.5v17M7.5 3.5v17M3 16.5h8.5M3 7.5h8.5M3 12h8.5" />
@@ -95,7 +98,7 @@ const Index = () => {
                 </p>
               </div>
               
-              <div className="text-center">
+              <div className="text-center p-6 rounded-lg enhanced-card bg-white">
                 <div className="mb-4 p-4 bg-fuchsia-100 inline-block rounded-full">
                   <svg className="h-10 w-10 text-fuchsia-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
@@ -112,13 +115,13 @@ const Index = () => {
         
         {/* CTA section - only show if not authenticated */}
         {!isAuthenticated && (
-          <section className="py-16 bg-gray-900 text-white">
+          <section className="py-16 bg-gradient-to-br from-gray-900 to-indigo-900 text-white">
             <div className="container mx-auto px-4 text-center">
               <h2 className="text-3xl font-bold mb-6">Ready to Join the Conversation?</h2>
               <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
                 Create an account today and start connecting with communities that share your interests.
               </p>
-              <Button size="lg" asChild className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold">
+              <Button size="xl" variant="primary" asChild className="hero-button bg-indigo-500 hover:bg-indigo-600 shadow-lg">
                 <Link to="/signup">Get Started Now</Link>
               </Button>
             </div>
